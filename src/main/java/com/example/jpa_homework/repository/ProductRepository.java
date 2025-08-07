@@ -44,9 +44,13 @@ public class ProductRepository {
         if (findProduct == null || productId == null) {
             throw new ResourceNotFoundException("Product not found");
         }
+
+        em.detach(findProduct);
+
         findProduct.setName(productRequest.getName());
         findProduct.setPrice(productRequest.getPrice());
         findProduct.setQuantity(productRequest.getQuantity());
+
         return em.merge(findProduct);
 
     }
@@ -60,9 +64,6 @@ public class ProductRepository {
     }
 
     public List<Product> findProductsByNameIgnoreCases(String searchName) {
-        if (searchName == null || searchName.isEmpty()) {
-
-        }
         return em.createQuery("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(:searchTerm)", Product.class)
                 .setParameter("searchTerm", "%" + searchName + "%")
                 .getResultList();
