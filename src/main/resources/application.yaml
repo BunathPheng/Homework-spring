@@ -1,9 +1,8 @@
-
 spring:
   application:
-    name: Jpa_homework
+    name: Jpa_homework , homework
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://157.245.207.70:5433/postgres   # change localhost to postgres
     username: postgres
     password: 123
     driver-class-name: org.postgresql.Driver
